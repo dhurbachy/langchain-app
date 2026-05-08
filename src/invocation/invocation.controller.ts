@@ -12,6 +12,11 @@ export class InvocationController {
     return this.invocationService.create(createInvocationDto);
   }
 
+  @Post('basic-invoke')
+  basicInvoke(@Body() createInvocationDto:CreateInvocationDto){
+    return this.invocationService.basicInvoke(createInvocationDto);
+  }
+
   
 
  

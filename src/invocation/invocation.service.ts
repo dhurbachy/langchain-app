@@ -1,26 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInvocationDto } from './dto/create-invocation.dto';
 import { UpdateInvocationDto } from './dto/update-invocation.dto';
+import { CommonAiService } from 'src/common-ai/common-ai.service';
+import { Logger } from '@nestjs/common'
 
 @Injectable()
 export class InvocationService {
+  private readonly logger = new Logger(InvocationService.name);
+  constructor(private readonly ai:CommonAiService){}
   create(createInvocationDto: CreateInvocationDto) {
     return 'This action adds a new invocation';
   }
 
-  findAll() {
-    return `This action returns all invocation`;
+  async basicInvoke(createInvocationDto: CreateInvocationDto){
+    const response = await this.ai.chat(createInvocationDto.prompt)
+    return response;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} invocation`;
-  }
-
-  update(id: number, updateInvocationDto: UpdateInvocationDto) {
-    return `This action updates a #${id} invocation`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} invocation`;
-  }
+ 
 }

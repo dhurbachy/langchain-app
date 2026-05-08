@@ -3,7 +3,7 @@ import { Ollama } from "@langchain/ollama"
 
 @Injectable()
 export class CommonAiService { 
-    private model:Ollama;
+    public model:Ollama;
 
     constructor(){
         this.model=new Ollama({

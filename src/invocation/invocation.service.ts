@@ -4,7 +4,7 @@ import { UpdateInvocationDto } from './dto/update-invocation.dto';
 import { CommonAiService } from 'src/common-ai/common-ai.service';
 import { Logger } from '@nestjs/common'
 import { PassThrough } from 'stream';
-
+import { HumanMessage } from '@langchain/core/messages';
 @Injectable()
 export class InvocationService {
   private readonly logger = new Logger(InvocationService.name);
@@ -34,6 +34,18 @@ export class InvocationService {
       }
     })();
     return stream;
+  }
+
+  async batchInvoke(prompt:string[]){
+    try{
+      
+       const response =await this.ai.model.batch(prompt);
+       return response;
+    }catch(error:any){
+      this.logger.error(`Batch Error ${error}`);
+      throw error;
+    }
+    
   }
 
 

@@ -3,7 +3,7 @@ import { InvocationService } from './invocation.service';
 import { CreateInvocationDto } from './dto/create-invocation.dto';
 import { UpdateInvocationDto } from './dto/update-invocation.dto';
 import * as fastify from 'fastify';
-
+import { HumanMessage } from '@langchain/core/messages';
 
 @Controller('invocation')
 export class InvocationController {
@@ -27,6 +27,17 @@ export class InvocationController {
     res.raw.setHeader('Connection', 'keep-alive');
 
     stream.pipe(res.raw);
+  }
+
+  @Post('batch-invoke')
+  async batchInvoke(@Body() prompt:string[]){
+     console.log('RECEIVED DTO:', prompt);
+
+  if (!prompt) {
+    throw new Error("The 'prompt' field is missing in the request body.");
+  }
+   
+    return await this.invocationService.batchInvoke(prompt);
   }
 
 

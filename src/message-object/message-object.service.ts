@@ -1,26 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,Logger } from '@nestjs/common';
 import { CreateMessageObjectDto } from './dto/create-message-object.dto';
 import { UpdateMessageObjectDto } from './dto/update-message-object.dto';
+import { CommonAiService } from 'src/common-ai/common-ai.service';
 
 @Injectable()
 export class MessageObjectService {
+  constructor(private readonly ai:CommonAiService){}
   create(createMessageObjectDto: CreateMessageObjectDto) {
     return 'This action adds a new messageObject';
   }
 
-  findAll() {
-    return `This action returns all messageObject`;
+  async textPrompt(createMessageObjectDto: CreateMessageObjectDto) {
+    return await this.ai.model.invoke(createMessageObjectDto.content);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} messageObject`;
+  async messagePrompt(createMessageObjectDto: CreateMessageObjectDto) {
+    return await `Message Prompt`;
   }
-
-  update(id: number, updateMessageObjectDto: UpdateMessageObjectDto) {
-    return `This action updates a #${id} messageObject`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} messageObject`;
+  async dictionaryFormat(createMessageObjectDto: CreateMessageObjectDto) {
+    return await `dictionary format`;
   }
 }

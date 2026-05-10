@@ -5,10 +5,11 @@ import { InvocationModule } from './invocation/invocation.module';
 import { CommonAiModule } from './common-ai/common-ai.module';
 import { StructureOutputModule } from './structure-output/structure-output.module';
 import { MessageObjectModule } from './message-object/message-object.module';
+import { MessageTypesModule } from './message-types/message-types.module';
 
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [InvocationModule, CommonAiModule, StructureOutputModule, MessageObjectModule],
+  imports: [InvocationModule, CommonAiModule, StructureOutputModule, MessageObjectModule, MessageTypesModule],
 })
 export class AppModule {}

@@ -54,8 +54,21 @@ export class MessageObjectController {
   messagePrompt(@Body() createMessageObjectDto: CreateMessageObjectDto[]) {
     return this.messageObjectService.messagePrompt(createMessageObjectDto);
   }
-  // @Post()
-  // dictionaryFormat(@Body() createMessageObjectDto: CaretPosition) {
-  //   return this.messageObjectService.dictionaryFormat(createMessageObjectDto);
-  // }
+  @Post('dictionary')
+  @ApiBody({
+    description: 'Converts a list of messages into a dictionary-style key-value format',
+    type: [CreateMessageObjectDto],
+    examples: {
+      dictionaryStyle: {
+        summary: 'Dictionary Mapping Example',
+        value: [
+          { "role": "system", "content": "You are a translator." },
+          { "role": "user", "content": "Translate 'Hello' to Spanish." }
+        ]
+      }
+    }
+  })
+  dictionaryFormat(@Body() createMessageObjectDto: CreateMessageObjectDto[]) {
+    return this.messageObjectService.dictionaryFormat(createMessageObjectDto);
+  }
 }

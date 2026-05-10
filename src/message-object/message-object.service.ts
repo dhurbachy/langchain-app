@@ -30,7 +30,17 @@ export class MessageObjectService {
     const response=await this.ai.model.invoke(messages as any);
     return response;
   }
-  async dictionaryFormat(createMessageObjectDto: CreateMessageObjectDto) {
-    return await `dictionary format`;
+  async dictionaryFormat(createMessageObjectDto: CreateMessageObjectDto[]) {
+    const dictionary=createMessageObjectDto.reduce((acc,dto)=>{
+      acc[dto.role]=dto.content;
+      return acc;
+    },{});
+    // this.logger.log('Processing Dictionary Format:',dictionary);
+    try{
+         return await this .ai.model.invoke(dictionary as any);
+
+    }catch(error:any){
+      throw error;
+    }
   }
 }

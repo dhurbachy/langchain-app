@@ -6,10 +6,12 @@ import { CommonAiModule } from './common-ai/common-ai.module';
 import { StructureOutputModule } from './structure-output/structure-output.module';
 import { MessageObjectModule } from './message-object/message-object.module';
 import { MessageTypesModule } from './message-types/message-types.module';
+import { ShortTermMemoryModule } from './short-term-memory/short-term-memory.module';
+import { ToolModule } from './tool/tool.module';
 
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [InvocationModule, CommonAiModule, StructureOutputModule, MessageObjectModule, MessageTypesModule],
+  imports: [InvocationModule, CommonAiModule, StructureOutputModule, MessageObjectModule, MessageTypesModule, ShortTermMemoryModule, ToolModule],
 })
 export class AppModule {}
